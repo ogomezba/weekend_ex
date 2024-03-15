@@ -1,0 +1,13 @@
+<.header>
+  Any preferences?
+</.header>
+
+<%= live_render(@conn, WeekendWeb.SearchInput, options: @recipes) %>
+
+<.simple_form for={nil} action={~p"/menus/new"} method="get">
+  <.input value={nil} name="preferences"></.input>
+
+  <:actions>
+    <.button class="size-full">Generate menu</.button>
+  </:actions>
+</.simple_form>

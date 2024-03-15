@@ -1,0 +1,28 @@
+<h1 class="text-xl font-bold text-center uppercase">The menu</h1>
+
+<.table id="menu" rows={@menu}>
+  <:col :let={slot} label="Sunday"><%= slot[0] %></:col>
+  <:col :let={slot} label="Monday"><%= slot[1] %></:col>
+  <:col :let={slot} label="Tuesday"><%= slot[2] %></:col>
+  <:col :let={slot} label="Wednesday"><%= slot[3] %></:col>
+  <:col :let={slot} label="Thursday"><%= slot[4] %></:col>
+  <:col :let={slot} label="Friday"><%= slot[5] %></:col>
+  <:col :let={slot} label="Saturday"><%= slot[6] %></:col>
+  <:col :let={slot} label="Sunday"><%= slot[7] %></:col>
+</.table>
+
+<h3 class="mt-2 text-xl">Ingredients</h3>
+
+<ul class="mt-4 grid gap-y-2 grid-cols-1">
+  <%= for {name, qty} <- @ingredients do %>
+    <li class="pl-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-50">
+      <%= "#{name}: #{qty}" %>
+    </li>
+  <% end %>
+</ul>
+
+<.link href={
+  if @preferences != "", do: ~p"/menus/new?#{[preferences: @preferences]}", else: ~p"/menus/new"
+}>
+  <.button class="mt-2 size-full">Regenerate</.button>
+</.link>

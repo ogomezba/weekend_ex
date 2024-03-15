@@ -1,0 +1,18 @@
+<.header>
+  <%= @recipe.name %>
+  <:actions>
+    <.link href={~p"/recipes/#{@recipe}/edit"}>
+      <.button>Edit recipe</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Name"><%= @recipe.name %></:item>
+  <:item title="Score"><%= @recipe.score %></:item>
+  <:item title="Slot"><%= @recipe.slot %></:item>
+  <:item title="Portions"><%= @recipe.portions %></:item>
+  <:item title="Last used"><%= @recipe.last_used %></:item>
+</.list>
+
+<.back navigate={~p"/recipes"}>Back to recipes</.back>
