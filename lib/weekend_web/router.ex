@@ -23,6 +23,16 @@ defmodule WeekendWeb.Router do
     live "/recipes/new", RecipesFormLive
     live "/recipes/:id/edit", RecipesFormLive
 
-    resources "/recipes", RecipeController, except: [:new, :edit]
+    resources "/recipes", RecipeController, except: [:new, :edit, :create, :update]
+  end
+
+  if Application.compile_env(:weekend, :dev_routes) do
+    import Phoenix.LiveDashboard.Router
+
+    scope "/dev" do
+      pipe_through :browser
+
+      live_dashboard "/dashboard"
+    end
   end
 end
