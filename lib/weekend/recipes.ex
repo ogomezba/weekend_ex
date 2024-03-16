@@ -37,7 +37,9 @@ defmodule Weekend.Recipes do
       ** (Ecto.NoResultsError)
 
   """
-  def get_recipe!(id), do: Repo.get!(Recipe, id)
+  def get_recipe!(id) do
+    Repo.get!(Recipe, id) |> Repo.preload(recipe_ingredients: [:ingredient])
+  end
 
   @doc """
   Creates a recipe.

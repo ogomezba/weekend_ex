@@ -13,6 +13,13 @@
   <:item title="Slot"><%= @recipe.slot %></:item>
   <:item title="Portions"><%= @recipe.portions %></:item>
   <:item title="Last used"><%= @recipe.last_used %></:item>
+  <:item title="Ingredients">
+    <%= for ri <- @recipe.recipe_ingredients do %>
+      <ul>
+        <li><%= ri.ingredient.name %>: <%= ri.qty %></li>
+      </ul>
+    <% end %>
+  </:item>
 </.list>
 
 <.back navigate={~p"/recipes"}>Back to recipes</.back>
