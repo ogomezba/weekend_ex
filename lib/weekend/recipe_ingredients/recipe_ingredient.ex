@@ -6,8 +6,8 @@ defmodule Weekend.RecipeIngredients.RecipeIngredient do
 
   @primary_key false
   schema "recipe_ingredients" do
-    belongs_to :recipe, Recipe
-    belongs_to :ingredient, Ingredient
+    belongs_to :recipe, Recipe, primary_key: true
+    belongs_to :ingredient, Ingredient, primary_key: true
 
     field :qty, :float
 
@@ -17,7 +17,7 @@ defmodule Weekend.RecipeIngredients.RecipeIngredient do
   @doc false
   def changeset(recipe_ingredient, attrs) do
     recipe_ingredient
-    |> cast(attrs, [:qty, :ingredient_id])
+    |> cast(attrs, [:qty, :ingredient_id, :recipe_id])
     |> validate_required([:qty])
     |> validate_number(:qty, greater_than_or_equal_to: 1, less_than: 100)
   end

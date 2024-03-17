@@ -1,5 +1,4 @@
-defmodule WeekendWeb.RecipesFormLive do
-  # In Phoenix v1.6+ apps, the line is typically: use MyAppWeb, :live_view
+defmodule WeekendWeb.RecipesNewLive do
   alias Weekend.Recipes.Recipe
   alias Weekend.Ingredients
   alias Weekend.Recipes
@@ -34,8 +33,6 @@ defmodule WeekendWeb.RecipesFormLive do
 
   def handle_event("save", %{"recipe" => recipe}, socket) do
     %{selected: selected} = socket.assigns
-
-    IO.inspect(selected)
 
     case Recipes.create_recipe(recipe, selected) do
       {:ok, recipe} ->

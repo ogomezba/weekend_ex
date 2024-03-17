@@ -38,7 +38,7 @@ defmodule Weekend.Recipes do
 
   """
   def get_recipe!(id) do
-    Repo.get!(Recipe, id) |> Repo.preload(recipe_ingredients: [:ingredient])
+    Repo.get!(Recipe, id) |> Repo.preload(recipe_ingredients: [:ingredient, :recipe])
   end
 
   @doc """
@@ -79,9 +79,17 @@ defmodule Weekend.Recipes do
       {:error, %Ecto.Changeset{}}
 
   """
-  def update_recipe(%Recipe{} = recipe, attrs) do
+  def update_recipe(%Recipe{} = recipe, ingredients, attrs) do
+    recipe_ingredients =
+      ingredients
+      |> Enum.map(fn {ingredient_id, qty} ->
+        %RecipeIngredient{}
+        |> RecipeIngredient.changeset(%{ingredient_id: ingredient_id, qty: qty})
+      end)
+
     recipe
     |> Recipe.changeset(attrs)
+    |> Ecto.Changeset.put_assoc(:recipe_ingredients, recipe_ingredients)
     |> Repo.update()
   end
 

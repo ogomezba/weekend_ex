@@ -17,11 +17,13 @@ defmodule WeekendWeb.Router do
   scope "/", WeekendWeb do
     pipe_through :browser
 
+    get "/", HomeController, :home
+
     live "/menus", MenuLive
     get "/menus/new", MenuController, :new
 
-    live "/recipes/new", RecipesFormLive
-    live "/recipes/:id/edit", RecipesFormLive
+    live "/recipes/new", RecipesNewLive
+    live "/recipes/:id/edit", RecipesEditLive
 
     resources "/recipes", RecipeController, except: [:new, :edit, :create, :update]
   end

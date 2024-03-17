@@ -10,7 +10,7 @@ defmodule Weekend.Recipes.Recipe do
     field :portions, :integer
     field :last_used, :date
 
-    has_many :recipe_ingredients, RecipeIngredient
+    has_many :recipe_ingredients, RecipeIngredient, on_replace: :delete
 
     timestamps(type: :utc_datetime)
   end
