@@ -10,10 +10,7 @@ defmodule Weekend.RecipeIngredientsFixtures do
   def recipe_ingredient_fixture(attrs \\ %{}) do
     {:ok, recipe_ingredient} =
       attrs
-      |> Enum.into(%{
-
-      })
-      |> Weekend.RecipeIngredients.create_recipe_ingredient()
+      |> Enum.into(%{})
 
     recipe_ingredient
   end

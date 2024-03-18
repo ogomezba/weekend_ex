@@ -564,7 +564,7 @@ defmodule WeekendWeb.CoreComponents do
     ~H"""
     <nav class="flex m-2 pl-2 rounded-xl bg-gray-100 py-2 sticky">
       <.link href={~p"/"} class="mr-3">
-        <.icon name="hero-cake" class="relative -top-1"></.icon>
+        <.icon name="hero-cake" class="relative -top-1" />
       </.link>
       <.navitem href={~p"/menus"} text="Menus" />
       <.navitem href={~p"/recipes"} text="Recipes" />

@@ -10,45 +10,7 @@ defmodule Weekend.RecipesFixtures do
   def recipe_fixture(attrs \\ %{}) do
     {:ok, recipe} =
       attrs
-      |> Enum.into(%{
-        last_used: ~D[2024-02-26],
-        name: "some name",
-        portions: 42,
-        score: 120.5,
-        slot: "some slot"
-      })
-      |> Weekend.Recipes.create_recipe()
-
-    recipe
-  end
-
-  @doc """
-  Generate a recipe.
-  """
-  def recipe_fixture(attrs \\ %{}) do
-    {:ok, recipe} =
-      attrs
-      |> Enum.into(%{
-        last_used: ~D[2024-02-27],
-        name: "some name",
-        portions: 42,
-        score: 120.5,
-        slot: "some slot"
-      })
-      |> Weekend.Recipes.create_recipe()
-
-    recipe
-  end
-
-  @doc """
-  Generate a recipe.
-  """
-  def recipe_fixture(attrs \\ %{}) do
-    {:ok, recipe} =
-      attrs
-      |> Enum.into(%{
-
-      })
+      |> Enum.into(%{})
       |> Weekend.Recipes.create_recipe()
 
     recipe
