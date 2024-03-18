@@ -3,8 +3,9 @@ name: Deploy To Gigalixir
 on:
   pull_request:
     types: [closed]
-    branches:
-      - main
+    branches: ["main"]
+  push:
+    branches: ["main"]
 jobs:
   docker:
     runs-on: ubuntu-latest
