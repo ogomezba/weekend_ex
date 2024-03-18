@@ -1,10 +1,9 @@
 name: Elixir CI
 
 on:
-  push:
-    branches: [ "*" ]  # adapt branch for project
   pull_request:
     branches: [ "main" ]  # adapt branch for project
+  workflow_call:
 
 # Sets the ENV `MIX_ENV` to `test` for running tests
 env:
@@ -92,15 +91,3 @@ jobs:
     # Customize this step as desired.
     # - name: Check Formatting
       # run: mix format --check-formatted
-
-    # Step: Execute the tests.
-    - name: Run tests
-      run: mix test
-
-    - name: Release to Gigalixir
-      if: github.event.pull_request.merged
-      run: |
-        sudo pip install gigalixir --ignore-installed six
-        gigalixir login -e "${{ secrets.GIGALIXIR_EMAIL }}" -y -p "${{ secrets.GIGALIXIR_PASSWORD }}"
-        gigalixir git:remote ${{ secrets.GIGALIXIR_APP_NAME }}
-        git push -f gigalixir HEAD:refs/heads/master
