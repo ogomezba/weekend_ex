@@ -1,15 +1,11 @@
 name: Deploy To Gigalixir
 
 on:
-  pull_request:
-    types: [closed]
-    branches: ["main"]
   push:
     branches: ["main"]
 jobs:
   docker:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged
     steps:
       - uses: actions/checkout@v1
       - run: sudo pip install gigalixir --ignore-installed six
