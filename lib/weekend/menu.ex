@@ -1,8 +1,8 @@
 defmodule Weekend.Menu do
   require Integer
   alias Weekend.RecipeIngredients.RecipeIngredient
-  alias Weekend.Repo
   alias Weekend.Recipes.Recipe
+  alias Weekend.Repo
 
   import Ecto.Query
 
@@ -10,6 +10,12 @@ defmodule Weekend.Menu do
   @score_weight 0.6
   @random_weight_range 50..100
 
+  @typep meal_slot() :: :D | :L
+
+  @type option() ::
+          {:preferences, [integer()]} | {:diners, integer()} | {:starting_slot, meal_slot()}
+  @spec generate_menu(options :: [option()]) ::
+          {:ok, {[Recipe.t()], [Recipe.t()]}} | {:error, String.t()}
   def generate_menu(options) do
     preferences = options[:preferences] || []
     diners = options[:diners] || 2
@@ -40,6 +46,11 @@ defmodule Weekend.Menu do
     end
   end
 
+  @spec build_menu(
+          state :: {%{meal_slot() => [Recipe.t()]}, meal_slot(), non_neg_integer()},
+          diners :: integer()
+        ) ::
+          {[Recipe.t()], [Recipe.t()]}
   defp build_menu({_, _, occupied_slots}, _) when occupied_slots >= 14,
     do: {[], []}
 
@@ -63,6 +74,7 @@ defmodule Weekend.Menu do
     end
   end
 
+  @spec next_slot(Recipe.t(), slot :: meal_slot(), diners :: pos_integer()) :: meal_slot()
   defp next_slot(%Recipe{portions: portions}, slot, diners) do
     if Integer.floor_div(portions, diners)
        |> Integer.is_odd() do
@@ -72,12 +84,15 @@ defmodule Weekend.Menu do
     end
   end
 
+  @spec calculate_score(Recipe.t(), preferences :: [integer()]) :: float()
   defp calculate_score(%Recipe{id: id} = recipe, preferences) do
     if id in preferences, do: 1, else: random_weight() * recipe_score(recipe)
   end
 
+  @spec random_weight() :: float()
   defp random_weight, do: Enum.random(@random_weight_range) / 100.0
 
+  @spec recipe_score(Recipe.t()) :: float()
   defp recipe_score(recipe) do
     last_used_score =
       if is_nil(recipe.last_used),

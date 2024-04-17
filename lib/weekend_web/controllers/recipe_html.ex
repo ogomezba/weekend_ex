@@ -5,5 +5,5 @@ defmodule WeekendWeb.RecipeHTML do
 
   embed_templates "recipe_html/*"
 
-  def slot_options(), do: @valid_slots
+  def slot_options, do: @valid_slots
 end

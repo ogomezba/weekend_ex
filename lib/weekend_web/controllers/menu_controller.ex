@@ -1,6 +1,6 @@
 defmodule WeekendWeb.MenuController do
-  alias Weekend.Recipes
   alias Weekend.Menu
+  alias Weekend.Recipes
   use WeekendWeb, :controller
 
   def index(conn, _params) do

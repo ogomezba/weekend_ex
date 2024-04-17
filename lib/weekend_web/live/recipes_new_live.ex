@@ -6,7 +6,7 @@ defmodule WeekendWeb.RecipesNewLive do
 
   @valid_slots ~w(L D)
 
-  def slot_options(), do: @valid_slots
+  def slot_options, do: @valid_slots
 
   def mount(_params, _session, socket) do
     ingredients =
@@ -58,10 +58,10 @@ defmodule WeekendWeb.RecipesNewLive do
       end
 
     results =
-      if !(value in (results |> Enum.map(fn {_, name} -> String.downcase(name) end))) do
-        [{"", original_value} | results]
-      else
+      if value in (results |> Enum.map(fn {_, name} -> String.downcase(name) end)) do
         results
+      else
+        [{"", original_value} | results]
       end
 
     {:noreply, assign(socket, results: results, search_term: original_value)}
