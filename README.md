@@ -1,3 +1,3 @@
-# Weekend
+# Weekend Project
 
 
