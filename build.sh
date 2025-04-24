@@ -15,3 +15,5 @@ MIX_ENV=prod mix assets.deploy
 # Create server script, Build the release, and overwrite the existing release directory
 MIX_ENV=prod mix phx.gen.release
 MIX_ENV=prod mix release --overwrite
+
+MIX_ENV=prod _build/prod/rel/weekend/bin/weekend eval "Weekend.Release.migrate"
